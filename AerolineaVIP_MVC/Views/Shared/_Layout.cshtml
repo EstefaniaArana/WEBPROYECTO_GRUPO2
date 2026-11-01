@@ -7,12 +7,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        /* Deja espacio para que el menú fijo no tape el contenido */
+        
         body {
             padding-top: 80px;
         }
 
-        /* Identidad sobria: azul oscuro, blanco, gris y dorado */
+     
         .navbar-vip {
             background-color: #0b2545;
         }
@@ -56,8 +56,9 @@
 </head>
 <body>
     @{
-        // Se calcula una sola vez si el usuario es personal administrativo
+        // Se calcula una sola vez según el rol del usuario
         bool esAdmin = User.IsInRole("SuperUsuario") || User.IsInRole("Administrador");
+        bool esCounter = esAdmin || User.IsInRole("Counter");
     }
 
     @* fixed-top = el menú queda fijo arriba aunque se haga scroll *@
@@ -77,8 +78,12 @@
                     <li class="nav-item">@Html.ActionLink("Mis reservas", "MisReservas", "Reservas", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Check-in", "Index", "CheckIn", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Comprobantes", "Index", "Comprobantes", null, new { @class = "nav-link" })</li>
-                    @* Los links del cliente (Mis reservas, Check-in, Comprobantes)
-        se agregan aquí cuando se construyan esas pantallas *@
+
+                    @* Solo el personal de mostrador (Counter) y la administración ven este enlace *@
+                    @if (esCounter)
+                    {
+                        <li class="nav-item">@Html.ActionLink("Counter", "Index", "Counter", null, new { @class = "nav-link" })</li>
+                    }
 
                     @if (esAdmin)
                     {

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\ComprobantesController.cs" />
+    <Compile Include="Controllers\CounterController.cs" />
     <Compile Include="Controllers\FrecuenciaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItinerarioController.cs" />
@@ -483,6 +484,8 @@
     <Content Include="Views\Usuarios\Historial.cshtml" />
     <Content Include="Views\Shared\_PestanasGestion.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Counter\Index.cshtml" />
+    <Content Include="Views\Home\AccesoDenegado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

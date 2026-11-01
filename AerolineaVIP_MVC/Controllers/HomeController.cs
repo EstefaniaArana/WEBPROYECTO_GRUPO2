@@ -47,6 +47,10 @@ namespace AerolineaVIP_MVC.Controllers
             ViewBag.Hoy = DateTime.Today.ToString("yyyy-MM-dd");
             return View();
         }
+        public ActionResult AccesoDenegado()
+        {
+            return View();
+        }
 
         // DESTINOS (JSON): lo llama jQuery cuando cambia el origen.
         // Devuelve solo los destinos que tienen una ruta activa desde ese origen.

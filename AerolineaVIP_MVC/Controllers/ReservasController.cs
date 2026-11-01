@@ -505,10 +505,12 @@ namespace AerolineaVIP_MVC.Controllers
         // ---------- Métodos de ayuda ----------
 
         // El titular de la reserva o el personal administrativo
+        // El titular de la reserva o el personal (administración y counter)
         private bool EsTitularOPersonal(Reserva r)
         {
             return r.UsuarioId == User.Identity.GetUserId()
-                || User.IsInRole("Administrador") || User.IsInRole("SuperUsuario");
+                || User.IsInRole("Administrador") || User.IsInRole("SuperUsuario")
+                || User.IsInRole("Counter");
         }
 
         // Devuelve el motivo por el que NO se puede cancelar, o null si sí se puede

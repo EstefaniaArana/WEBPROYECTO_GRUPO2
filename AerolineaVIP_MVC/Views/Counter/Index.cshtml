@@ -1,0 +1,71 @@
+﻿@model List<AerolineaVIP_MVC.Controllers.FilaCounter>
+@{
+    ViewBag.Title = "Atención en mostrador";
+}
+
+<h2>Atención en mostrador</h2>
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger", role = "alert" })
+
+@* FILTROS: se envían por GET y llegan al método Index del CounterController *@
+<form method="get" action="@Url.Action("Index", "Counter")" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label for="codigo" class="form-label">Código de reserva</label>
+        <input type="text" id="codigo" name="codigo" class="form-control" maxlength="20" value="@ViewBag.Codigo" />
+        @Html.ValidationMessage("codigo", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-3">
+        <label for="documento" class="form-label">Documento del pasajero</label>
+        <input type="text" id="documento" name="documento" class="form-control" maxlength="20" value="@ViewBag.Documento" />
+        @Html.ValidationMessage("documento", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-3">
+        <label for="estado" class="form-label">Estado</label>
+        @Html.DropDownList("estado", (SelectList)ViewBag.Estados, "Todos", new { @class = "form-select", id = "estado" })
+    </div>
+    <div class="col-md-3 d-flex align-items-end gap-2">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <a href="@Url.Action("Index", "Counter")" class="btn btn-outline-secondary">Limpiar</a>
+    </div>
+</form>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info" role="alert">No hay reservas con esos datos.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Vuelo</th>
+                    <th>Pasajeros</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var f in Model)
+                {
+                    <tr>
+                        <td>@f.Codigo</td>
+                        <td>@f.Vuelo</td>
+                        <td>@f.Pasajeros</td>
+                        <td>@f.Estado</td>
+                        <td>
+                            @* Se abre la pantalla 14 (Gestionar), donde se ve el detalle y se cancela *@
+                            <a href="@Url.Action("Gestionar", "Reservas", new { id = f.ReservaId })" class="btn btn-sm btn-primary">Atender</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
