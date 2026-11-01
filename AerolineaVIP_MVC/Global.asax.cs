@@ -31,7 +31,7 @@ namespace AerolineaVIP_MVC
                 var usuarios = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(contexto));
 
                 // 1) Roles
-                string[] nombresRoles = { "SuperUsuario", "Administrador", "Cliente" };
+                string[] nombresRoles = { "SuperUsuario", "Administrador", "Counter", "Cliente" };
                 foreach (string nombre in nombresRoles)
                 {
                     if (!roles.RoleExists(nombre))
@@ -42,6 +42,7 @@ namespace AerolineaVIP_MVC
                 CrearUsuario(usuarios, "superadmin", "superadmin@aerolineavip.com", "Super123*", "SuperUsuario");
                 CrearUsuario(usuarios, "admin", "admin@aerolineavip.com", "Admin123*", "Administrador");
                 CrearUsuario(usuarios, "cliente1", "cliente1@aerolineavip.com", "Cliente123*", "Cliente");
+                CrearUsuario(usuarios, "counter1", "counter1@aerolineavip.com", "Counter123*", "Counter");
             }
             catch (Exception ex)
             {
